@@ -44,23 +44,24 @@ Hypothesis 3
 
 There were ## columns in the initial data and ## columns after preparation; ### rows in the intial data and ### after preparation the central target column will be property_tax: 
 
-|   Targee    |       Datatype        |    Definition      |
-|------------|-----------------------|:------------------: |
-| property_tax  | ##### non-null: object |   (int)   |
+|   Target    |       Datatype        |       Definition              |
+|------------ |-----------------------|-------------------------------|
+| home_value  | 50283 non-null: float64 |  target variable            |
+        
+        
+|  Feature    |       Datatype         |     Definition               |
+|-------------|------------------------|------------------------------|
+| bedrooms    | 50283 non-null: int64  | # of bedrooms                |
+| bathrooms   | 50283 non-null: int64  | # of bathrooms               |
+| sqft        | 50283 non-null: int64  | # of square feet             |
+| year_built  | 50283 non-null: object | year house was built)        |
+| county      | 50283 non-null: object | County house located         |
+| lot_size    | 50283 non-null: int64  | size of lot                  |
+| longitude   | 50283 non-null: int64  | longitude line house located |
+| latitude    | 50283 non-null: int64  | latitude line house located  |   
 
 
-|        Feature          |       Datatype        |     Definition        |
-|-------------------------|-----------------------|-----------------------|
-|lot_size 	      |##### non-null: object  | (integer)       |
-|bedrooms	      |##### non-null: uint8   | (integer)       |
-|bathrooms	      |##### non-null: uint8   | (integer)       |
-|sqft	          |##### non-null: uint8   | (integer)       |
-|lot_size 	      |##### non-null: object  | (integer)       |
-|bedrooms	      |##### non-null: uint8   | (integer)       |
-|bathrooms	      |##### non-null: uint8   | (integer)       |
-|sqft	          |##### non-null: uint8   | (integer)       |
-
-## Project Planning
+## Project Planni
 ### Planning
 1. Clearly define the problem to be investigated, such as the impact lot size on property assessed tax value.
 2. Obtain the required data from the "Zillow.csv" database.
