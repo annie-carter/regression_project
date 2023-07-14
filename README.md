@@ -14,22 +14,24 @@ This project predicts factors contributing to 2017 property tax assessed values 
 ## Initial Questions 
 To guide our analysis, we initially posed the following questions:
 
-1. Does the County (fip) have a significant impact on property tax value?
-2. Does lot size have a relationship to property tax value?
-3. Is there a relationship between bedrooms and property tax value?
+1. Does the Lot Size have a significant impact on property tax value?
+2. Is there a relationship between square ft and property tax value?
+3. Does number of bedrooms have a relationship to property tax value?
+4. Does number of bathrooms have a relationship to property tax value?
+
 
 
 ## Initial Hypotheses 
 Hypothesis 1 
 * alpha = .05 
-* H0= California County is independent of property tax
-* Ha= California County is dependent on property tax
+* H0= Lot Size is independent of property tax
+* Ha= Lot Sizeis dependent on property tax
 * Outcome: We will accept or reject the Null Hypothesis.
 
 Hypothesis 2 
 * alpha = .05 
-* H0 = Lot Size is independent of property tax 
-* Ha = Lot Size is dependent on property tax
+* H0 = Square Feet is independent of property tax 
+* Ha = Square Feet is dependent on property tax
 * Outcome: We will  accept or reject the Null Hypothesis.
     
 Hypothesis 3 
@@ -38,32 +40,36 @@ Hypothesis 3
 * Ha = Bedrooms is dependent on property tax
 * Outcome: We will  accept or reject the Null Hypothesis.
 
+Hypothesis 3 
+* alpha = .05 
+* H0 = Bathrooms is independent of property tax 
+* Ha = Bathrooms is dependent on property tax
+* Outcome: We will  accept or reject the Null Hypothesis.
 
 
 ## Data Dictionary
 
 There were ## columns in the initial data and ## columns after preparation; ### rows in the intial data and ### after preparation the central target column will be property_tax: 
 
-|   Target    |       Datatype        |       Definition              |
-|------------ |-----------------------|-------------------------------|
-| home_value  | 50283 non-null: float64 |  target variable            |
-        
-        
-|  Feature    |       Datatype         |     Definition               |
-|-------------|------------------------|------------------------------|
-| bedrooms    | 50283 non-null: int64  | # of bedrooms                |
-| bathrooms   | 50283 non-null: int64  | # of bathrooms               |
-| sqft        | 50283 non-null: int64  | # of square feet             |
-| year_built  | 50283 non-null: object | year house was built)        |
-| county      | 50283 non-null: object | County house located         |
-| lot_size    | 50283 non-null: int64  | size of lot                  |
-| longitude   | 50283 non-null: int64  | longitude line house located |
-| latitude    | 50283 non-null: int64  | latitude line house located  |   
+| Original                    |   Target    |       Datatype          |       Definition             |
+|-----------------------------|-------------|-------------------------|------------------------------|
+|  taxvaluedollarcnt          |  tax_value  | 50283 non-null: float64 |  target variable             |
 
 
-## Project Planni
+|                             |   Feature    |       Datatype         |     Definition               |
+|-----------------------------|--------------|------------------------|------------------------------|
+|  bedroomcnt                 |  bedrooms    | 50283 non-null: int64  | # of bedrooms                |
+|  bathroomcnt                |  bathrooms   | 50283 non-null: int64  | # of bathrooms               |
+|calculatedfinishedsquarefeet |  sqft        | 50283 non-null: int64  | # of square feet             |
+|  yearbuilt                  |  year_built  | 50283 non-null: object | year house was built)        |
+|  fips                       |  county      | 50283 non-null: object | County house located         |
+|  lotsizesquarefeet          |  lot_size    | 50283 non-null: int64  | size of lot                  |
+|  longitude                  |  longitude   | 50283 non-null: int64  | longitude line house located |
+|  latitude                   |  latitude    | 50283 non-null: int64  | latitude line house located  |    
+
+## Project Planning
 ### Planning
-1. Clearly define the problem to be investigated, such as the impact lot size on property assessed tax value.
+1. Clearly define the problem to be investigated, such as the impact  square feet on property assessed tax value.
 2. Obtain the required data from the "Zillow.csv" database.
 3. Create a comprehensive README.md file documenting all necessary information.
 ### Acquisition and Preparation
@@ -93,15 +99,15 @@ By following these instructions, you will be able to reproduce the analysis and 
 
 
 ## Key findings/ Conclusion
-After selecting three features and creating data visualizations, I chose the features that displayed visual significance and had a more significant relationship in _____chi-square_____ statistical testing to train the Regression Model which were California County and Lot Size. Among the tested models, ____________ emerged as the most effective model for predicting property assessed value, surpassing the baseline accuracy of ___% with a consistent accuracy of ____% across the train, validate, and test sets.
+After selecting three features and creating data visualizations, I chose the features that displayed visual significance and had a more significant relationship in _____chi-square_____ statistical testing to train the Regression Model which were California County and Square Feet. Among the tested models, ____________ emerged as the most effective model for predicting property assessed value, surpassing the baseline accuracy of ___% with a consistent accuracy of ____% across the train, validate, and test sets.
    
 Hypothesis 1: California County and Property Tax Value
 - Outcome: We ______ the Null Hypothesis, indicating that California County is dependent on property tax value.
 - However, the relationship between California County and property tax is dependent, with a count of _###_ out of ###. It can be utilized in the modeling process.
 
-Hypothesis 2: Lot Size and Property Tax Value
-- Outcome: We ____ the Null Hypothesis, indicating that Lot Size is dependent on property tax value.
-- Nevertheless, the relationship between Lot Size and property tax is ______, with a count of only ____ out of ____. Hence, it will not be used in the modeling phase.
+Hypothesis 2: Square Feet and Property Tax Value
+- Outcome: We ____ the Null Hypothesis, indicating that Square Feet is dependent on property tax value.
+- Nevertheless, the relationship between Square Feet and property tax is ______, with a count of only ____ out of ____. Hence, it will not be used in the modeling phase.
 
 Hypothesis 3: Bedrooms and Property Tax Value
 - Outcome: We rejected the Null Hypothesis, indicating that the number of bedrooms are dependent on property tax value.

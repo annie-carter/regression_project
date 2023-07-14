@@ -42,6 +42,89 @@ def california_county(train):
                 y=train['latitude'], zorder=1,hue='county')
 plt.show()
 
+def pairplot(train):
+    sns.pairplot(train, hue = 'county')
+    plt.title('Pairplot of Zillow features')
+    plt.show()
+    
+def heatmap(train):
+    #Visualizing correlation data with Heat Map
+    plt.figure(figsize=(25,20))
+    sns.heatmap(train.corr(), cmap='Blues', center=0, annot=True)
+    plt.show()
+    
+#random sample of 3017 which is apprx 10% of training data 
+def plot_variable_pairs():
+    train_sample = train.sample(n=3017)
+    features = ['bedrooms', 'bathrooms', 'sqft', 'lot_size']
+    for feature in features:
+        sns.lmplot(x=feature, y="tax_value", data=train_sample, hue='county', line_kws={'color': 'red'})        
+plot_variable_pairs()
+
+
+def plot_categorical_and_continuous_vars():
+    train_sample = train.sample(n=3017)
+    features = ['bedrooms', 'bathrooms', 'sqft', 'lot_size',]
+    
+    for feature in features:
+        sns.set(rc={'figure.figsize': (30, 15)})
+        fig, axes = plt.subplots(2, 2)
+        
+        sns.boxplot(x=feature, y="tax_value", data=train_sample, hue='county', ax=axes[0, 0])
+        axes[0, 0].set_title('Boxplot')
+        
+        sns.barplot(x=feature, y="tax_value", data=train_sample, hue='county', ax=axes[0, 1])
+        axes[0, 1].set_title('Barplot')
+        
+        sns.violinplot(x=feature, y="tax_value", data=train_sample, hue='county', ax=axes[1, 0])
+        axes[1, 0].set_title('Violinplot')
+        
+        sns.scatterplot(x=feature, y="tax_value", data=train_sample, hue='county', ax=axes[1, 1])
+        axes[1, 1].set_title('Scatterplot')
+        
+    plt.tight_layout()
+plot_categorical_and_continuous_vars()
+
+
+
+#--------- SCALING FUNCTIONS--------
+def visualize_scaler(scaler, df, features_to_scale, bins=50):
+    # Create subplot structure
+    fig, axs = plt.subplots(len(features_to_scale), 2, figsize=(12, 12))
+
+    # Copy the df for scaling
+    df_scaled = df.copy()
+
+    # Fit and transform the df
+    df_scaled[features_to_scale] = scaler.fit_transform(df[features_to_scale])
+
+    # Plot the pre-scaled data next to the post-scaled data in one row of a subplot
+    for (ax1, ax2), feature in zip(axs, features_to_scale):
+        ax1.hist(df[feature], bins=bins)
+        ax1.set(title=f'{feature} before scaling', xlabel=feature, ylabel='count')
+        ax2.hist(df_scaled[feature], bins=bins)
+        ax2.set(title=f'{feature} after scaling with {scaler.__class__.__name__}', xlabel=feature, ylabel='count')
+    plt.tight_layout()
+    
+# call function with minmax
+mm_scaler = MinMaxScaler(feature_range=(0, 1))
+visualize_scaler(scaler=mm_scaler, df=train, features_to_scale=to_scale, bins=50)   
+
+# call function with standardscaler
+standard_scaler = StandardScaler()
+visualize_scaler(scaler=standard_scaler, df=train, features_to_scale=to_scale, bins=50)
+
+# call function with robustscaler
+r_scaler = RobustScaler()
+visualize_scaler(scaler=r_scaler, df=train, features_to_scale=to_scale, bins=50)
+
+
+qt_scaler = QuantileTransformer()
+visualize_scaler(scaler=qt_scaler, df=train, features_to_scale=to_scale, bins=50)
+
+
+
+#------------ MODELING-----------
 def ols_lasso_tweedie(X_train, X_validate, y_train, y_validate, metric_df):
     ''' This function'''
 
@@ -136,3 +219,25 @@ def ols_lasso_tweedie(X_train, X_validate, y_train, y_validate, metric_df):
         Validation/Out-of-Sample: {rmse_validate_tweedie:.2f}\n""")
 
     return y_train, y_validate, metric_df
+
+
+#Will use for final 
+def bath_box():
+    train_sample = train.sample(n=3017)
+    features = ['bathrooms']
+    
+    for feature in features:
+        sns.set(rc={'figure.figsize': (12, 12)})
+        
+        sns.boxplot(x=feature, y="tax_value", data=train_sample, hue='county')
+        plt.title('Bathrooms vs County')
+        
+def bed_in_box():
+    train_sample = train.sample(n=3017)
+    features = ['bedrooms']
+    
+    for feature in features:
+        sns.set(rc={'figure.figsize': (12, 12)})
+        
+        sns.boxplot(x=feature, y="tax_value", data=train_sample, hue='county')
+        plt.title('Bedrooms vs County')

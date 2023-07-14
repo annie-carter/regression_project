@@ -25,7 +25,7 @@ def get_zillow_data():
         return pd.read_csv(filename)
     else:
         sql_query = '''
-                    SELECT bedroomcnt, bathroomcnt, calculatedfinishedsquarefeet, taxvaluedollarcnt, yearbuilt, fips, lotsizesquarefeet, longitude, latitude
+                    SELECT bedroomcnt, bathroomcnt, calculatedfinishedsquarefeet, taxvaluedollarcnt, yearbuilt, fips, lotsizesquarefeet,longitude, latitude
                     FROM properties_2017
                     JOIN predictions_2017 USING (parcelid)
                     JOIN propertylandusetype USING (propertylandusetypeid)
@@ -51,26 +51,29 @@ def prep_zillow(df):
     df.drop_duplicates(inplace=True)
     return df
 
+
+
+
 #--------- CLEAN DATA FUNCTIONS---------
     
 
-def rename_county(df):
-    ''' The below functions were created in regression excercises and will be aggregated to make a master clean_data function for final report
-    '''
-    df['county'] = df.county.map({6037.0: 'Los Angeles', 6059.0: 'Orange Cty', 6111.0: 'Ventura'})
-    return df
+# def rename_county(df):
+#     ''' The below functions were created in regression excercises and will be aggregated to make a master clean_data function for final report
+#     '''
+#     df['county'] = df.county.map({6037.0: 'Los Angeles', 6059.0: 'Orange Cty', 6111.0: 'Ventura'})
+#     return df
 
 
-def remove_nobed_nobath(df):
-    df = df[(df.bedrooms != 0) & (df.bathrooms != 0) & (df.sqft >= 70)]
-    return df
+# def remove_nobed_nobath(df):
+#     df = df[(df.bedrooms != 0) & (df.bathrooms != 0) & (df.sqft >= 70)]
+#     return df
 
-def remove_outliers(df):
-    #eliminate outliers
-    df = df[df.bathrooms <= 6]
-    df = df[df.bedrooms <= 6]
-    df = df[df.tax_value < 2_000_000]
-    return df 
+# def remove_outliers(df):
+#     #eliminate outliers
+#     df = df[df.bathrooms <= 6]
+#     df = df[df.bedrooms <= 6]
+#     df = df[df.tax_value < 2_000_000]
+#     return df 
 
 def dtype_zillow(df):
     # Convert bedrooms, bathrooms, and sqft columns to integers
@@ -80,6 +83,7 @@ def dtype_zillow(df):
     df['lot_size'] = df['lot_size'].astype(int)
     df['longitude'] = df['longitude'].astype(int)
     df['latitude'] = df['latitude'].astype(int)
+    df['tax_value'] = df['tax_value'].astype(int)
     
     # Convert year_built and fips columns to integers and then to strings
     df['year_built'] = df['year_built'].astype(int).astype(str)   
@@ -95,6 +99,12 @@ def master_clean_zillow(df):
     df = dtype_zillow(df)
     return df
 
+def final_wrangle(df):
+    df = get_zillow_data(df)
+    df = prep_zillow(df)
+    df= master_clean_zillow(df)
+    return df
+
 #----------SPLIT DATA---------
 
 def split_zillow(df):
@@ -105,21 +115,14 @@ def split_zillow(df):
     train, validate = train_test_split(train_validate, test_size=0.25, random_state=123)
     return train, validate, test
 
+def x_y_split(train, validate, test):
+    X_train, y_train = train.drop(columns=['tax_value', 'county']), train.tax_value
+    X_validate, y_validate = validate.drop(columns=['tax_value', 'county']), validate.tax_value
+    X_test, y_test = test.drop(columns=['tax_value', 'county']), test.tax_value
+    return X_train, y_train, X_validate, y_validate, X_test, y_test
 
 def print_train(train, validate, test):
     print(f'Train shape: {train.shape}')
     print(f'Validate shape: {validate.shape}')
     print(f'Test shape: {test.shape}')
 
-def x_y_split(train, validate, test):
-    X_train, y_train = train.select_dtypes('float').drop(columns='tax_value'), train.tax_value
-    X_validate, y_validate = validate.select_dtypes('float').drop(columns='tax_value'),validate.tax_value
-    X_test, y_test = test.select_dtypes('float').drop(columns='tax_value'), test.tax_value
-    return X_train, y_train,X_validate,y_validate,X_test,y_test
-
-def scaled_data(train, validate, test):
-    '''This function takes in the train, validate, and test datasets removes the county columns so the data can be scaled.'''
-    train = train.drop(columns='county') 
-    validate = validate.drop(columns='county')
-    test = test.drop(columns='county')
-    return train, validate, test
