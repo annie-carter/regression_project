@@ -44,7 +44,7 @@ def prep_zillow(df):
     information.
     '''
     #change column names to be more readable
-    df = df.rename(columns={'bedroomcnt':'bedrooms', 'bathroomcnt':'bathrooms', 'calculatedfinishedsquarefeet':'sqft','taxvaluedollarcnt':'home_value', 'yearbuilt':'year_built', 'lotsizesquarefeet' : 'lot_size', 'fips':'county'})
+    df = df.rename(columns={'bedroomcnt':'bedrooms', 'bathroomcnt':'bathrooms', 'calculatedfinishedsquarefeet':'sqft','taxvaluedollarcnt':'tax_value', 'yearbuilt':'year_built', 'lotsizesquarefeet' : 'lot_size', 'fips':'county'})
     #drop null values 
     df = df.dropna()
     #drop duplicates
@@ -69,7 +69,7 @@ def remove_outliers(df):
     #eliminate outliers
     df = df[df.bathrooms <= 6]
     df = df[df.bedrooms <= 6]
-    df = df[df.home_value < 2_000_000]
+    df = df[df.tax_value < 2_000_000]
     return df 
 
 def dtype_zillow(df):
@@ -112,8 +112,14 @@ def print_train(train, validate, test):
     print(f'Test shape: {test.shape}')
 
 def x_y_split(train, validate, test):
-    x_train, y_train = train.select_dtypes('float').drop(columns='home_value'), train.home_value
-    x_validate, y_validate = validate.select_dtypes('float').drop(columns='hom_value'),validate.home_value
-    x_test, y_test = test.select_dtypes('float').drop(columns='home_value'), test.home_value
-    return x_train, y_train,x_validate,y_validate,x_test,y_test
+    X_train, y_train = train.select_dtypes('float').drop(columns='tax_value'), train.tax_value
+    X_validate, y_validate = validate.select_dtypes('float').drop(columns='tax_value'),validate.tax_value
+    X_test, y_test = test.select_dtypes('float').drop(columns='tax_value'), test.tax_value
+    return X_train, y_train,X_validate,y_validate,X_test,y_test
 
+def scaled_data(train, validate, test):
+    '''This function takes in the train, validate, and test datasets removes the county columns so the data can be scaled.'''
+    train = train.drop(columns='county') 
+    validate = validate.drop(columns='county')
+    test = test.drop(columns='county')
+    return train, validate, test
