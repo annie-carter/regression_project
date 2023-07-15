@@ -54,12 +54,12 @@ def heatmap(train):
     plt.show()
     
 #random sample of 3017 which is apprx 10% of training data 
-def plot_variable_pairs():
+def plot_variable_pairs(train):
     train_sample = train.sample(n=3017)
     features = ['bedrooms', 'bathrooms', 'sqft', 'lot_size']
     for feature in features:
         sns.lmplot(x=feature, y="tax_value", data=train_sample, hue='county', line_kws={'color': 'red'})        
-plot_variable_pairs()
+
 
 
 def plot_categorical_and_continuous_vars():

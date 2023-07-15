@@ -57,23 +57,23 @@ def prep_zillow(df):
 #--------- CLEAN DATA FUNCTIONS---------
     
 
-# def rename_county(df):
-#     ''' The below functions were created in regression excercises and will be aggregated to make a master clean_data function for final report
-#     '''
-#     df['county'] = df.county.map({6037.0: 'Los Angeles', 6059.0: 'Orange Cty', 6111.0: 'Ventura'})
-#     return df
+def rename_county(df):
+    ''' The below functions were created in regression excercises and will be aggregated to make a master clean_data function for final report
+    '''
+    df['county'] = df.county.map({6037.0: 'Los Angeles', 6059.0: 'Orange Cty', 6111.0: 'Ventura'})
+    return df
 
 
-# def remove_nobed_nobath(df):
-#     df = df[(df.bedrooms != 0) & (df.bathrooms != 0) & (df.sqft >= 70)]
-#     return df
+def remove_nobed_nobath(df):
+    df = df[(df.bedrooms != 0) & (df.bathrooms != 0) & (df.sqft >= 70)]
+    return df
 
-# def remove_outliers(df):
-#     #eliminate outliers
-#     df = df[df.bathrooms <= 6]
-#     df = df[df.bedrooms <= 6]
-#     df = df[df.tax_value < 2_000_000]
-#     return df 
+def remove_outliers(df):
+    #eliminate outliers
+    df = df[df.bathrooms <= 6]
+    df = df[df.bedrooms <= 6]
+    df = df[df.tax_value < 2_000_000]
+    return df 
 
 def dtype_zillow(df):
     # Convert bedrooms, bathrooms, and sqft columns to integers
@@ -99,8 +99,8 @@ def master_clean_zillow(df):
     df = dtype_zillow(df)
     return df
 
-def final_wrangle(df):
-    df = get_zillow_data(df)
+def final_wrangle():
+    df = get_zillow_data()
     df = prep_zillow(df)
     df= master_clean_zillow(df)
     return df
@@ -113,7 +113,11 @@ def split_zillow(df):
     '''
     train_validate, test = train_test_split(df, test_size=0.2, random_state=123)
     train, validate = train_test_split(train_validate, test_size=0.25, random_state=123)
-    return train, validate, test
+    print(f'Train shape: {train.shape}')
+    print(f'Validate shape: {validate.shape}')
+    print(f'Test shape: {test.shape}')
+    return train, validate, test 
+   
 
 def x_y_split(train, validate, test):
     X_train, y_train = train.drop(columns=['tax_value', 'county']), train.tax_value

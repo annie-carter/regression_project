@@ -25,7 +25,7 @@ To guide our analysis, we initially posed the following questions:
 Hypothesis 1 
 * alpha = .05 
 * H0= Lot Size is independent of property tax
-* Ha= Lot Sizeis dependent on property tax
+* Ha= Lot Size is dependent on property tax
 * Outcome: We will accept or reject the Null Hypothesis.
 
 Hypothesis 2 
