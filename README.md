@@ -57,7 +57,7 @@ There were ## columns in the initial data and ## columns after preparation; ### 
     * Validate the models to assess their performance.
     * Select the most effective model (e.g., Logistic Regression) for further testing.
 ### Product Delivery
-8, Prepare a final notebook that integrates the best visuals, models, and pertinent data to present comprehensive insights.
+8. Prepare a final notebook that integrates the best visuals, models, and pertinent data to present comprehensive insights.
 
 
 ## Instructions  to Reproduce the Final Project Notebook
@@ -97,7 +97,7 @@ Hypothesis 4 - Spearman R
 * <b>Outcome: We reject the Null Hypothesis.</b>
 * Inconsistent findings due to extremely low correlation.
 
-## Key findings
+## Key Findings
 - After selecting four features and conducting data visualizations, scaling, and statistical testing using Pearson R and Spearman R, the correlation coefficients (r-values) between the features and the target variable in both the training and validation datasets show a positive relationship with small p-values.
 - Across the three different counties, all features exhibit a correlation/relationship with property tax value ranging from very weak to moderate. Among these features, square footage demonstrates the strongest regression line.
 - In Los Angeles County, there is a higher average of single-family homes with 6+ bedrooms, indicating higher tax values and larger lot sizes. Bedrooms have a lesser impact on property tax value compared to bathrooms. Ventura County has a scarcity of one-bedroom homes, while Orange County shows a distribution comparable to bedrooms and tax value.
@@ -119,7 +119,7 @@ Based on the findings, the following recommendations and next steps are proposed
 By pursuing these steps, a more comprehensive analysis can be achieved, providing valuable insights into the factors influencing property tax values across the Los Angeles, Ventura and Orange counties.
 
    
-#### Recommendations 
+## Recommendations 
 - To improve prediction accuracy, it is recommended to aggregate at least three years of past data.
 - During the data cleaning process, using the Interquartile Range (IQR) method with the 25th and 75th percentiles is advised to avoid overfitting and address the natural skewness in the data.
 - In order to enhance the prediction model, incorporating the "bathbdcnt" column from the original zillow.csv dataset is recommended, as it eliminates redundancy and improves the accuracy of predictions.
