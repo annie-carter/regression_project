@@ -123,7 +123,7 @@ def x_y_split(train, validate, test):
     X_train, y_train = train.drop(columns=['tax_value', 'county']), train.tax_value
     X_validate, y_validate = validate.drop(columns=['tax_value', 'county']), validate.tax_value
     X_test, y_test = test.drop(columns=['tax_value', 'county']), test.tax_value
-    return X_train, y_train, X_validate, y_validate, X_test, y_test
+    return X_train, y_train, X_validate, y_validate, X_test, y_test 
 
 def print_train(train, validate, test):
     print(f'Train shape: {train.shape}')

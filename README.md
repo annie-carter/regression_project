@@ -1,4 +1,4 @@
-# REGRESSION_PROJECT
+# <bu>REGRESSION_PROJECT</bu>
 
 
 ## Project Description
@@ -14,37 +14,10 @@ This project predicts factors contributing to 2017 property tax assessed values 
 ## Initial Questions 
 To guide our analysis, we initially posed the following questions:
 
-1. Does the Lot Size have a significant impact on property tax value?
-2. Is there a relationship between square ft and property tax value?
+1. Does number of bathrooms have a relationship to property tax value?
+2. Is there a relationship between square feet and property tax value?
 3. Does number of bedrooms have a relationship to property tax value?
-4. Does number of bathrooms have a relationship to property tax value?
-
-
-
-## Initial Hypotheses 
-Hypothesis 1 
-* alpha = .05 
-* H0= Lot Size is independent of property tax
-* Ha= Lot Size is dependent on property tax
-* Outcome: We will accept or reject the Null Hypothesis.
-
-Hypothesis 2 
-* alpha = .05 
-* H0 = Square Feet is independent of property tax 
-* Ha = Square Feet is dependent on property tax
-* Outcome: We will  accept or reject the Null Hypothesis.
-    
-Hypothesis 3 
-* alpha = .05 
-* H0 = Bedrooms is independent of property tax 
-* Ha = Bedrooms is dependent on property tax
-* Outcome: We will  accept or reject the Null Hypothesis.
-
-Hypothesis 3 
-* alpha = .05 
-* H0 = Bathrooms is independent of property tax 
-* Ha = Bathrooms is dependent on property tax
-* Outcome: We will  accept or reject the Null Hypothesis.
+4. Does the Lot Size have a significant impact on property tax value?
 
 
 ## Data Dictionary
@@ -66,6 +39,7 @@ There were ## columns in the initial data and ## columns after preparation; ### 
 |  lotsizesquarefeet          |  lot_size    | 50283 non-null: int64  | size of lot                  |
 |  longitude                  |  longitude   | 50283 non-null: int64  | longitude line house located |
 |  latitude                   |  latitude    | 50283 non-null: int64  | latitude line house located  |    
+
 
 ## Project Planning
 ### Planning
@@ -97,37 +71,56 @@ To successfully run/reproduce the final project notebook, please follow these st
 
 By following these instructions, you will be able to reproduce the analysis and review the project's final report. Feel free to explore the code, visualizations, and conclusions presented in the notebook.
 
+## Initial Hypotheses 
+Hypothesis 1 - Pearson R
+* alpha = .05 
+* H0 = Number of Bathrooms has no relationship with of property tax value
+* Ha = Number of Bathrooms has a relationship with property tax value
+* <b> Outcome: We reject the Null Hypothesis.</b>
 
-## Key findings/ Conclusion
-After selecting three features and creating data visualizations, I chose the features that displayed visual significance and had a more significant relationship in _____chi-square_____ statistical testing to train the Regression Model which were California County and Square Feet. Among the tested models, ____________ emerged as the most effective model for predicting property assessed value, surpassing the baseline accuracy of ___% with a consistent accuracy of ____% across the train, validate, and test sets.
-   
-Hypothesis 1: California County and Property Tax Value
-- Outcome: We ______ the Null Hypothesis, indicating that California County is dependent on property tax value.
-- However, the relationship between California County and property tax is dependent, with a count of _###_ out of ###. It can be utilized in the modeling process.
-
-Hypothesis 2: Square Feet and Property Tax Value
-- Outcome: We ____ the Null Hypothesis, indicating that Square Feet is dependent on property tax value.
-- Nevertheless, the relationship between Square Feet and property tax is ______, with a count of only ____ out of ____. Hence, it will not be used in the modeling phase.
-
-Hypothesis 3: Bedrooms and Property Tax Value
-- Outcome: We rejected the Null Hypothesis, indicating that the number of bedrooms are dependent on property tax value.
-- However, the relationship between the number of bedrooms and property tax value is ______, with a count of ## out of #####. Thus, it will not be considered in the modeling process.
-
-
-For modeling, I selected the features of _______, aiming to exceed the baseline accuracy of __%. Using Ordinary Least Squares (OLS) Linear Regression, Least Absolute Shrinkage and Selection Operator (LASSO),  Least Angle Regression (LARS),  models with a Random Seed of 123, I strived to achieve higher accuracy without over/underfitting. 
-
-While ________ models scored higher than the baseline accuracy and exhibited consistent performance in both training and validation, ______consistently outperformed _____with an overall accuracy of ##%. The ______ regression model was chosen over the _____ Model due to the notable ##% difference between the training and validation scores in the ______ Model. The chosen  ______ Regression Model was applied to the test data.
-
-____________ Regression performed the best of all three models with consistent ##% accuracy scores in training, validation and testing.
- 
+Hypothesis 2 - Spearman R
+* alpha = .05 
+* H0 = Square Feet has no correlation with property tax value
+* Ha = Square Feet is correlated to property tax value
+* <b>Outcome: We reject the Null Hypothesis.</b>
     
-## Recommendations and Next Steps
-Based on the findings, I propose the following recommendations and next steps:
-<!-- NEEDS REWRITE Exclude the Lot Size and number of bedrooms columns during the preparation phase, as their relationship with customer property taxis shallow.
-- Conduct chi-square statistical testing on the remaining columns to determine their significance in relation to property tax value, creating a subset that excludes relationships with counts less than 100 for modeling.
-- Experiment with different hyperparameters to optimize the model's performance.
-- Implement an exit survey for customers who have property tax valueed and consider conducting a property taxand welcome survey for new customers to gather insights on why they left their previous company for Zillow. -->
+Hypothesis 3 - Pearson R
+* alpha = .05 
+* H0 = Number of Bedrooms has no relationship with property tax value
+* Ha = Number of Bedrooms has a relationship with on property tax value
+* <b>Outcome: We reject the Null Hypothesis.</b>
+
+Hypothesis 4 - Spearman R 
+* alpha = .05 
+* H0= Lot Size has no significant correlation with property tax value
+* Ha= Lot Size is correlated  to property tax value
+* <b>Outcome: We reject the Null Hypothesis.</b>
+* Inconsistent findings due to extremely low correlation.
+
+## Key findings
+- After selecting four features and conducting data visualizations, scaling, and statistical testing using Pearson R and Spearman R, the correlation coefficients (r-values) between the features and the target variable in both the training and validation datasets show a positive relationship with small p-values.
+- Across the three different counties, all features exhibit a correlation/relationship with property tax value ranging from very weak to moderate. Among these features, square footage demonstrates the strongest regression line.
+- In Los Angeles County, there is a higher average of single-family homes with 6+ bedrooms, indicating higher tax values and larger lot sizes. Bedrooms have a lesser impact on property tax value compared to bathrooms. Ventura County has a scarcity of one-bedroom homes, while Orange County shows a distribution comparable to bedrooms and tax value.
+- The rejection of null hypotheses for bedrooms, square footage, bathrooms, and lot size provides evidence of a significant relationship with property tax value.
+- These findings confirm the significance of the correlations and validate the use of the Pearson R correlation test, indicating a somewhat normal distribution of the data.
+
+## Conclusion
+This project aimed to develop a machine learning regression model to forecast the assessed values of single-family properties using property attributes. The analysis revealed that all features across the three different counties showed varying correlations with property tax value, with square footage exhibiting the strongest relationship. Los Angeles County had a higher average of 6+ bedroom single-family homes with higher tax values and larger lot sizes. Bedrooms had a lesser impact on tax value compared to bathrooms, and Ventura County had fewer one-bedroom homes. The null hypotheses were rejected for bedrooms, square footage, bathrooms, and lot size, indicating significant relationships with property tax value. The best performing models were OLS and Lasso+Lars, with an RMSE of 275,079 and 278,281 respectively, outperforming the baseline. The chosen model for further analysis is Lasso+Lars (alpha = 0.03).
+   
+## Next Steps
+Based on the findings, the following recommendations and next steps are proposed:
+
+1. Conduct Polynomial Regression: To delve deeper into the relationship between the features and property tax values, it is recommended to perform Polynomial Regression analysis. This will provide additional insights into the non-linear relationships and potential higher-order interactions between the variables.
+
+2. Create Dummy Variables for Counties: In order to capture the variations across different counties, it is advised to create dummy variables to split the data by counties. This will enable the development of separate models for each county, allowing for a more comprehensive examination of the unique factors influencing property tax values within each region.
+
+3. Explore Additional Features: Further exploration of the dataset should include an investigation of additional features that may impact property tax values. Consideration can be given to factors such as neighborhood characteristics, proximity to amenities, or economic indicators to gain a more comprehensive understanding of the factors at play.
+
+By pursuing these steps, a more comprehensive analysis can be achieved, providing valuable insights into the factors influencing property tax values across the Los Angeles, Ventura and Orange counties.
 
    
-## Takeaways 
-<!--  NEEDS REWRITE Although the models employed in this Regression project demonstrated effectiveness and accuracy, the selected features could have provided more valuable insights into the risk of property tax value. However, the data proved useful in identifying weak relationships associated with Lot Size, number of bedrooms, and even tech support in relation to property tax value. These elements can be excluded from future modeling efforts to enhance efficiency and accuracy. -->
+#### Recommendations 
+- To improve prediction accuracy, it is recommended to aggregate at least three years of past data.
+- During the data cleaning process, using the Interquartile Range (IQR) method with the 25th and 75th percentiles is advised to avoid overfitting and address the natural skewness in the data.
+- In order to enhance the prediction model, incorporating the "bathbdcnt" column from the original zillow.csv dataset is recommended, as it eliminates redundancy and improves the accuracy of predictions.
+- However, it is advisable to exclude variables such as "fireplace" and "basement" from the analysis due to a high number of null values, despite their significant correlations with tax value prediction.
