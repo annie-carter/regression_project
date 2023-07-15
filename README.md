@@ -22,7 +22,7 @@ To guide our analysis, we initially posed the following questions:
 
 ## Data Dictionary
 
-There were ## columns in the initial data and ## columns after preparation; ### rows in the intial data and ### after preparation the central target column will be property_tax: 
+There were 9 columns in the initial data and 9 columns after preparation; 52441 rows in the intial data and 50282 after preparation the central target column will be property_tax: 
 
 | Original                    |   Target    |       Datatype          |       Definition             |
 |-----------------------------|-------------|-------------------------|------------------------------|
