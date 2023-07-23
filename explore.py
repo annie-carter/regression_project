@@ -38,26 +38,30 @@ warnings.filterwarnings("ignore")
 #------ Will use for FINAL REPORT------
 
 def california_county(train):
+    custom_palette = ['#A52A2A', '#8F4813', '#F0C648']
+#     custom_palette = ['#62310e', #CD853F','#F0C648', '#A59a18''#C8A192',491B1D]
     fig, ax = plt.subplots(figsize = (7,5))
     sns.scatterplot(data=train,x=train['longitude'],
-                y=train['latitude'], zorder=1,hue='county')
+                y=train['latitude'], zorder=1,hue='county',palette=custom_palette)
 plt.show()
 
 #Question 1 Bathrooms
 def bath_box(train):
+    custom_palette = ['#A52A2A', '#8F4813', '#F0C648']
     train_sample = train.sample(n=3017)
     features = ['bathrooms']
     
     for feature in features:
         sns.set(rc={'figure.figsize': (12, 12)})
         
-        sns.boxplot(x=feature, y="tax_value", data=train_sample, hue='county')
+        sns.boxplot(x=feature, y="tax_value", data=train_sample, hue='county', palette=custom_palette)
         plt.title('Bathrooms vs County')
         
-def bath_bar():    
+def bath_bar():  
+    custom_palette = ['#A52A2A', '#8F4813', '#F0C648']
     train_sample = train.sample(n=3017)
     # Visualizing bathrooms by county
-    bath = sns.countplot(data=train_sample, x='bathrooms', hue='county')
+    bath = sns.countplot(data=train_sample, x='bathrooms', hue='county', palette=custom_palette)
     
     # Access the legend object
     legend = bath.legend()
@@ -97,9 +101,10 @@ def bath_stat(train, validate, test):
         
 #Question 2 Sqft
 def sqft_scat(train):
+    custom_palette = ['#A52A2A', '#8F4813', '#F0C648']
     sns.set(rc={'figure.figsize': (12, 12)})
     train_sample = train.sample(n=3017)
-    sns.scatterplot(x= 'sqft', y="tax_value", data=train_sample, hue = 'county')
+    sns.scatterplot(x= 'sqft', y="tax_value", data=train_sample, hue = 'county', palette=custom_palette)
     plt.xlabel('Tax Value')
     plt.ylabel('SFH Square Feet ')
     plt.title('Tax Value vs. Square Feet')
@@ -122,25 +127,33 @@ def sqft_stat(train, validate, test):
     else:
         print("Outcome: We fail to reject the null")
         
-        
+def sqft_lmplot(train):
+    custom_palette = ['#A52A2A', '#8F4813', '#F0C648']
+    train_sample = train.sample(n=3017)
+    sns.lmplot(x='sqft', y="tax_value", data=train_sample, hue='county', palette=custom_palette)
+    plt.title ('Sqft vs Tax Value by County')  
+    plt.xlabel('SFH Square Footage')
+    plt.ylabel('Tax Value')
         
 # Question 3   Bedrooms     
 def bed_in_box(train):
+    custom_palette = ['#A52A2A', '#8F4813', '#F0C648']
     train_sample = train.sample(n=3017)
     features = ['bedrooms']
     
     for feature in features:
         sns.set(rc={'figure.figsize': (12, 12)})
         
-        sns.boxplot(x=feature, y="tax_value", data=train_sample, hue='county')
+        sns.boxplot(x=feature, y="tax_value", data=train_sample, hue='county', palette=custom_palette)
         plt.title('Bedrooms vs County')
         
 def bed_in_bar(train):
+    custom_palette = ['#A52A2A', '#8F4813', '#F0C648']
     train_sample = train.sample(n=3017)
     x = ['bedrooms']  # Assuming you want to display the count for the 'bedrooms' feature
     
     # Visualizing the bathrooms by county
-    br = sns.countplot(data=train_sample, x='bedrooms', hue='county')
+    br = sns.countplot(data=train_sample, x='bedrooms', hue='county', palette=custom_palette)
     
     # Access the legend object
     legend = br.legend()
@@ -160,9 +173,12 @@ def bed_in_bar(train):
     plt.show()
     
 def plot_bed_pairs(train):
+    custom_palette = ['#A52A2A', '#8F4813', '#F0C648']
     train_sample = train.sample(n=3017)
-    sns.lmplot(x='bedrooms', y="tax_value", data=train_sample, hue='county', line_kws={'color': 'red'})
-    
+    sns.lmplot(x='bedrooms', y="tax_value", data=train_sample, hue='county', palette=custom_palette)
+    plt.title('Bedrooms vs Tax Value By County')
+    plt.xlabel('Number of Bedrooms')
+    plt.ylabel('SFH Tax Value')
 #Bedrooms stat
 def bedrooms_stat(train, validate, test):
     alpha = 0.05
@@ -182,9 +198,10 @@ def bedrooms_stat(train, validate, test):
         
     #Question 4 Lot size
 def lot_scat(train):
+    custom_palette = ['#A52A2A', '#8F4813', '#F0C648']
     sns.set(rc={'figure.figsize': (12, 12)})
     train_sample = train.sample(n=3017)
-    sns.scatterplot(x='tax_value', y='lot_size', data=train_sample, hue='county')
+    sns.scatterplot(x='tax_value', y='lot_size', data=train_sample, hue='county', palette=custom_palette)
     plt.xlabel('Tax Value')
     plt.ylabel('Lot Size')
     plt.title('Tax Value vs. Lot Size')
@@ -212,24 +229,27 @@ def lot_stat(train, validate, test):
 # EXPLORATION THAT DID NOT MAKE THE FINAL REPORT
 
 def pairplot(train):
-    sns.pairplot(train, hue = 'county')
+    custom_palette = ['#A52A2A', '#8F4813', '#F0C648']
+    sns.pairplot(train, hue = 'county', palette=custom_palette)
     plt.title('Pairplot of Zillow features')
     plt.show()
     
 def heatmap(train):
     #Visualizing correlation data with Heat Map
     plt.figure(figsize=(25,20))
-    sns.heatmap(train.corr(), cmap='Blues', center=0, annot=True)
+    sns.heatmap(train.corr(), cmap='browns', center=0, annot=True)
     plt.show()
     
 #random sample of 3017 which is apprx 10% of training data 
 def plot_variable_pairs(train):
+    custom_palette = ['#A52A2A', '#8F4813', '#F0C648']
     train_sample = train.sample(n=3017)
     features = ['bedrooms', 'bathrooms', 'sqft', 'lot_size']
     for feature in features:
-        sns.lmplot(x=feature, y="tax_value", data=train_sample, hue='county', line_kws={'color': 'red'})        
+        sns.lmplot(x=feature, y="tax_value", data=train_sample, hue='county', palette=custom_palette)        
 
 def plot_categorical_and_continuous_vars(train):
+    custom_palette = ['#A52A2A', '#8F4813', '#F0C648']
     train_sample = train.sample(n=3017)
     features = ['bedrooms', 'bathrooms', 'sqft', 'lot_size',]
     
@@ -237,16 +257,16 @@ def plot_categorical_and_continuous_vars(train):
         sns.set(rc={'figure.figsize': (30, 15)})
         fig, axes = plt.subplots(2, 2)
         
-        sns.boxplot(x=feature, y="tax_value", data=train_sample, hue='county', ax=axes[0, 0])
+        sns.boxplot(x=feature, y="tax_value", data=train_sample, hue='county', palette=custom_palette, ax=axes[0, 0])
         axes[0, 0].set_title('Boxplot')
         
-        sns.barplot(x=feature, y="tax_value", data=train_sample, hue='county', ax=axes[0, 1])
+        sns.barplot(x=feature, y="tax_value", data=train_sample, hue='county', palette=custom_palette, ax=axes[0, 1])
         axes[0, 1].set_title('Barplot')
         
-        sns.violinplot(x=feature, y="tax_value", data=train_sample, hue='county', ax=axes[1, 0])
+        sns.violinplot(x=feature, y="tax_value", data=train_sample, hue='county', palette=custom_palette, ax=axes[1, 0])
         axes[1, 0].set_title('Violinplot')
         
-        sns.scatterplot(x=feature, y="tax_value", data=train_sample, hue='county', ax=axes[1, 1])
+        sns.scatterplot(x=feature, y="tax_value", data=train_sample, hue='county', palette=custom_palette, ax=axes[1, 1])
         axes[1, 1].set_title('Scatterplot')
         
     plt.tight_layout()
@@ -258,6 +278,7 @@ def plot_categorical_and_continuous_vars(train):
 
 
 def visualize_scaler(scaler, df, features_to_scale, bins=50):
+   
     # Create subplot structure
     fig, axs = plt.subplots(len(features_to_scale), 2, figsize=(12, 12))
 
@@ -269,9 +290,9 @@ def visualize_scaler(scaler, df, features_to_scale, bins=50):
 
     # Plot the pre-scaled data next to the post-scaled data in one row of a subplot
     for (ax1, ax2), feature in zip(axs, features_to_scale):
-        ax1.hist(df[feature], bins=bins)
+        ax1.hist(df[feature], bins=bins, palette = '#A52A2A')
         ax1.set(title=f'{feature} before scaling', xlabel=feature, ylabel='count')
-        ax2.hist(df_scaled[feature], bins=bins)
+        ax2.hist(df_scaled[feature], bins=bins, palette = '#F0C648')
         ax2.set(title=f'{feature} after scaling with {scaler.__class__.__name__}', xlabel=feature, ylabel='count')
     plt.tight_layout()
     
