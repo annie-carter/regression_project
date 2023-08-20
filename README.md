@@ -1,5 +1,22 @@
-# <bu>REGRESSION_PROJECT</bu>
+# Analyzing Zillow’s Home Value Predictors
+# <bu>REGRESSION PROJECT</bu>
+by Annie Carter, MSN, BS, RN
+Sourced by Kaggle : Feature Prediction Competition
 
+![image](https://github.com/annie-carter/regression_project/assets/131205837/f1a6d43a-308b-48ef-9dc4-b889f2a4d8c0)
+___
+
+<a id='navigation'></a>
+[[Project Description](#project-description)]
+[[Statistical Testing Hypothesis](#statistical-tested-hypotheses)]
+[[Data Dictionary](#data-dictionary)]
+[[Planning_Process](#planning-process)]
+[[Project Reproduction](#project-reproduction)]
+[[Key Findings](#key-findings)]
+[[Next Steps](#next-steps)]
+[[Conclusion](#conclusion)]
+[[Recommendations](#recommendations)]
+[[References](#references)]
 
 ## Project Description
 This project predicts factors contributing to 2017 property tax assessed values for three California counties ( Orange County, Ventura, Los Angeles). The data collected from this project can help with future planning on ways to decrease property tax and improve loyalty to the Zillow brand.
@@ -10,7 +27,6 @@ This project predicts factors contributing to 2017 property tax assessed values 
 * Identify the crucial factors property tax assessed values of single family properties that had a transaction during 2017. 
 * Present findings to lead data scientist and other Zillow stakeholders
 
-
 ## Initial Questions 
 To guide our analysis, we initially posed the following questions:
 
@@ -18,7 +34,7 @@ To guide our analysis, we initially posed the following questions:
 2. Is there a relationship between square feet and property tax value?
 3. Does number of bedrooms have a relationship to property tax value?
 4. Does the Lot Size have a significant impact on property tax value?
-
+[Jump to Navigation](#navigation)
 
 ## Data Dictionary
 
@@ -40,6 +56,7 @@ There were 9 columns in the initial data and 9 columns after preparation; 52441 
 |  longitude                  |  longitude   | 50283 non-null: int64  | longitude line house located |
 |  latitude                   |  latitude    | 50283 non-null: int64  | latitude line house located  |    
 
+[Jump to Navigation](#navigation)
 
 ## Project Planning
 ### Planning
@@ -59,11 +76,12 @@ There were 9 columns in the initial data and 9 columns after preparation; 52441 
 ### Product Delivery
 8. Prepare a final notebook that integrates the best visuals, models, and pertinent data to present comprehensive insights.
 
+[Jump to Navigation](#navigation)
 
-## Instructions  to Reproduce the Final Project Notebook
+## Project Reproduction Instructions
 To successfully run/reproduce the final project notebook, please follow these steps:
 1. Read this README.md document to familiarize yourself with the project details and key findings.
-2. Before proceeding, ensure that you have the necessary database credentials. Create or use an environment (env) file that includes the required credentials, such as username, password, and host. Make sure not to add your env file to the project repository, but .gitignore.
+2. Before proceeding, ensure that you have the necessary database credentials. Create or use an environment (env) file that includes the required credentials, such as username, password, and host. Make sure not to add your env file to the project repository, but .gitignore. In addition you can get raw datasets from kaggle https://www.kaggle.com/competitions/zillow-prize-1/data
 3. Clone the Regression_project repository from my GitHub or download the following files: aquire.py, prepare.py, and final_report.ipynb. You can find these files in the project repository.
 4. Open the final_report.ipynb notebook in your preferred Jupyter Notebook environment or any compatible Python environment.
 5. Ensure that all necessary libraries or dependent programs are installed. You may need to install additional packages if they are not already present in your environment.
@@ -71,7 +89,9 @@ To successfully run/reproduce the final project notebook, please follow these st
 
 By following these instructions, you will be able to reproduce the analysis and review the project's final report. Feel free to explore the code, visualizations, and conclusions presented in the notebook.
 
-## Initial Hypotheses 
+[Jump to Navigation](#navigation)
+
+## Statistical Testing Hypotheses 
 Hypothesis 1 - Pearson R
 * alpha = .05 
 * H0 = Number of Bathrooms has no relationship with of property tax value
@@ -96,6 +116,8 @@ Hypothesis 4 - Spearman R
 * Ha= Lot Size is correlated  to property tax value
 * <b>Outcome: We reject the Null Hypothesis.</b>
 * Inconsistent findings due to extremely low correlation.
+  
+[Jump to Navigation](#navigation)
 
 ## Key Findings
 - After selecting four features and conducting data visualizations, scaling, and statistical testing using Pearson R and Spearman R, the correlation coefficients (r-values) between the features and the target variable in both the training and validation datasets show a positive relationship with small p-values.
@@ -104,9 +126,13 @@ Hypothesis 4 - Spearman R
 - The rejection of null hypotheses for bedrooms, square footage, bathrooms, and lot size provides evidence of a significant relationship with property tax value.
 - These findings confirm the significance of the correlations and validate the use of the Pearson R correlation test, indicating a somewhat normal distribution of the data.
 
+[Jump to Navigation](#navigation)
+
 ## Conclusion
 This project aimed to develop a machine learning regression model to forecast the assessed values of single-family properties using property attributes. The analysis revealed that all features across the three different counties showed varying correlations with property tax value, with square footage exhibiting the strongest relationship. Los Angeles County had a higher average of 6+ bedroom single-family homes with higher tax values and larger lot sizes. Bedrooms had a lesser impact on tax value compared to bathrooms, and Ventura County had fewer one-bedroom homes. The null hypotheses were rejected for bedrooms, square footage, bathrooms, and lot size, indicating significant relationships with property tax value. The best performing models were OLS and Lasso+Lars, with an RMSE of 275,079 and 278,281 respectively, outperforming the baseline. The chosen model for further analysis is Lasso+Lars (alpha = 0.03).
-   
+
+[Jump to Navigation](#navigation)   
+
 ## Next Steps
 Based on the findings, the following recommendations and next steps are proposed:
 
@@ -118,9 +144,11 @@ Based on the findings, the following recommendations and next steps are proposed
 
 By pursuing these steps, a more comprehensive analysis can be achieved, providing valuable insights into the factors influencing property tax values across the Los Angeles, Ventura and Orange counties.
 
-   
+[Jump to Navigation](#navigation)  
 ## Recommendations 
 - To improve prediction accuracy, it is recommended to aggregate at least three years of past data.
 - During the data cleaning process, using the Interquartile Range (IQR) method with the 25th and 75th percentiles is advised to avoid overfitting and address the natural skewness in the data.
 - In order to enhance the prediction model, incorporating the "bathbdcnt" column from the original zillow.csv dataset is recommended, as it eliminates redundancy and improves the accuracy of predictions.
 - However, it is advisable to exclude variables such as "fireplace" and "basement" from the analysis due to a high number of null values, despite their significant correlations with tax value prediction.
+- 
+[Jump to Navigation](#navigation)
