@@ -1,7 +1,7 @@
 # Analyzing Zillow’s Home Value Predictors
 # <bu>REGRESSION PROJECT</bu>
-by Annie Carter, MSN, BS, RN
-Sourced by Kaggle : Feature Prediction Competition
+* by Annie Carter, MSN, BS, RN
+* Sourced by Kaggle : Feature Prediction Competition
 
 ![image](https://github.com/annie-carter/regression_project/assets/131205837/f1a6d43a-308b-48ef-9dc4-b889f2a4d8c0)
 ___
